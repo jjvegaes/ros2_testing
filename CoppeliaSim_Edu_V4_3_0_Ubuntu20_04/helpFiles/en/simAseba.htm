@@ -1,0 +1,1383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Aseba Plugin API reference</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+<script type="text/javascript">
+//
+function getParameterByName(name, url = window.location.href)
+{
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if(!results) return null;
+    if(!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+//
+                </script><style type="text/css">
+td.section { margin: 0; padding: 0; }
+                </style>
+</head>
+<body>
+<div align="center"><table class="allEncompassingTable">
+<tr><td id="title" class="section"><h1>Aseba Plugin API reference</h1></td></tr>
+<tr><td id="info" class="section"><p class="infoBox">A plugin to emulate Aseba nodes in CoppeliaSim</p></td></tr>
+<tr><td id="alphabetical" class="section"><pre class="lightGreyBox"><a href="?#_thymio2_create">simAseba._thymio2_create</a>
+<a href="?#_thymio2_enable_accelerometer">simAseba._thymio2_enable_accelerometer</a>
+<a href="?#_thymio2_enable_ground">simAseba._thymio2_enable_ground</a>
+<a href="?#_thymio2_enable_prox_comm">simAseba._thymio2_enable_prox_comm</a>
+<a href="?#_thymio2_enable_proximity">simAseba._thymio2_enable_proximity</a>
+<a href="?#_thymio2_get_acceleration">simAseba._thymio2_get_acceleration</a>
+<a href="?#_thymio2_get_button">simAseba._thymio2_get_button</a>
+<a href="?#_thymio2_get_ground">simAseba._thymio2_get_ground</a>
+<a href="?#_thymio2_get_prox_comm_rx">simAseba._thymio2_get_prox_comm_rx</a>
+<a href="?#_thymio2_get_proximity">simAseba._thymio2_get_proximity</a>
+<a href="?#_thymio2_get_speed">simAseba._thymio2_get_speed</a>
+<a href="?#_thymio2_set_button">simAseba._thymio2_set_button</a>
+<a href="?#_thymio2_set_led">simAseba._thymio2_set_led</a>
+<a href="?#_thymio2_set_led_intensity">simAseba._thymio2_set_led_intensity</a>
+<a href="?#_thymio2_set_prox_comm_tx">simAseba._thymio2_set_prox_comm_tx</a>
+<a href="?#_thymio2_set_target_speed">simAseba._thymio2_set_target_speed</a>
+<a href="?#add_event">simAseba.add_event</a>
+<a href="?#add_function">simAseba.add_function</a>
+<a href="?#add_variable">simAseba.add_variable</a>
+<a href="?#create_node">simAseba.create_node</a>
+<a href="?#destroy_network">simAseba.destroy_network</a>
+<a href="?#destroy_node">simAseba.destroy_node</a>
+<a href="?#emit_event">simAseba.emit_event</a>
+<a href="?#get_variable">simAseba.get_variable</a>
+<a href="?#list_nodes">simAseba.list_nodes</a>
+<a href="?#load_script">simAseba.load_script</a>
+<a href="?#set_friendly_name">simAseba.set_friendly_name</a>
+<a href="?#set_script">simAseba.set_script</a>
+<a href="?#set_uuid">simAseba.set_uuid</a>
+<a href="?#set_variable">simAseba.set_variable</a>
+</pre></td></tr>
+<tr><td id="commands" class="section">
+<h3 class="subsectionBar">
+<a name="_thymio2_create" id="_thymio2_create"></a>simAseba._thymio2_create</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Instantiate a Thymio2 controller</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int id=simAseba._thymio2_create(int handle, bool with_aseba=true, string friendly_name="Thymio II", int port=33333, int id=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>handle</strong> (int): Handle of the Thymio2 model in CoppeliaSim</div>
+<div>
+<strong>with_aseba</strong> (bool, default: true): Start emulating the Aseba firmware</div>
+<div>
+<strong>friendly_name</strong> (string, default: "Thymio II"): A friendlier name used in Thymio Suite to label nodes. Must not be unique. If left empty, it is set to "Thymio II".</div>
+<div>
+<strong>port</strong> (int, default: 33333): The Aseba port number</div>
+<div>
+<strong>id</strong> (int, default: -1): The Aseba node ID. Two nodes in the same Aseba network cannot have the same id. Set to -1 to choose the lowest available id.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>id</strong> (int): The ID assigned to the Thymio2 controller and its potential Aseba node.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">int id=simAseba._thymio2_create(int handle, bool with_aseba=true, string friendly_name="Thymio II", int port=33333, int id=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_enable_accelerometer" id="_thymio2_enable_accelerometer"></a>simAseba._thymio2_enable_accelerometer</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Enable or disable the accelerometer</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_enable_accelerometer(int id, bool state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>state</strong> (bool): The state (enabled: true, disabled: false)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_enable_accelerometer(int id, bool state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_enable_ground" id="_thymio2_enable_ground"></a>simAseba._thymio2_enable_ground</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Enable, disable and configure the ground sensors</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_enable_ground(int id, bool state, bool red=false, bool vision=false)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>state</strong> (bool): The state (enabled: true, disabled: false)</div>
+<div>
+<strong>red</strong> (bool, default: false): Configure the sensors to respond only to the red-compoment of the reflecting material.</div>
+<div>
+<strong>vision</strong> (bool, default: false): Configure the sensors to use vision to get the color of the reflecting material.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_enable_ground(int id, bool state, bool red=false, bool vision=false)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_enable_prox_comm" id="_thymio2_enable_prox_comm"></a>simAseba._thymio2_enable_prox_comm</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Enable or disable the proximity communication</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_enable_prox_comm(int id, bool state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>state</strong> (bool): The state (enabled: true, disabled: false)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_enable_prox_comm(int id, bool state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_enable_proximity" id="_thymio2_enable_proximity"></a>simAseba._thymio2_enable_proximity</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Enable, disable and configure the proximity sensors</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_enable_proximity(int id, bool state, bool red=false)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>state</strong> (bool): The state (enabled: true, disabled: false)</div>
+<div>
+<strong>red</strong> (bool, default: false): Configure the sensors to respond only to the red-compoment of the reflecting material.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_enable_proximity(int id, bool state, bool red=false)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_get_acceleration" id="_thymio2_get_acceleration"></a>simAseba._thymio2_get_acceleration</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get the current reading the accelerometer</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">float x, float y, float z=simAseba._thymio2_get_acceleration(int id)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>x</strong> (float): The x-component (left) in m/s^2</div>
+<div>
+<strong>y</strong> (float): The y-component (front) in m/s^2</div>
+<div>
+<strong>z</strong> (float): The z-component (down) in m/s^2</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">float x, float y, float z=simAseba._thymio2_get_acceleration(int id)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_get_button" id="_thymio2_get_button"></a>simAseba._thymio2_get_button</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get the current state of a button sensor</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool value=simAseba._thymio2_get_button(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the button.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>value</strong> (bool): Pressed: true, Released: false</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">bool value=simAseba._thymio2_get_button(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_get_ground" id="_thymio2_get_ground"></a>simAseba._thymio2_get_ground</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get the current reading of a ground sensor</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">float reflected=simAseba._thymio2_get_ground(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the sensor (left: 0, right: 0)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>reflected</strong> (float): The current sensor reading</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">float reflected=simAseba._thymio2_get_ground(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_get_prox_comm_rx" id="_thymio2_get_prox_comm_rx"></a>simAseba._thymio2_get_prox_comm_rx</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get the last messages received by the proximity communication</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">prox_comm_message_t[] messages=simAseba._thymio2_get_prox_comm_rx(int id)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>messages</strong> (table of prox_comm_message_t): A table of messages, one for each sender.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">list messages=simAseba._thymio2_get_prox_comm_rx(int id)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_get_proximity" id="_thymio2_get_proximity"></a>simAseba._thymio2_get_proximity</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get the current reading of a proximity sensor</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">float reading=simAseba._thymio2_get_proximity(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the sensor</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>reading</strong> (float): The current sensor reading</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">float reading=simAseba._thymio2_get_proximity(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_get_speed" id="_thymio2_get_speed"></a>simAseba._thymio2_get_speed</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get the currrent angular speed of a motor</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">float speed=simAseba._thymio2_get_speed(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the motor (left: 0, right: 0)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>speed</strong> (float): The angular speed in rad/s</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">float speed=simAseba._thymio2_get_speed(int id, int index)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_set_button" id="_thymio2_set_button"></a>simAseba._thymio2_set_button</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Overwrite the current state of a button sensor</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_set_button(int id, int index, bool value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the button.</div>
+<div>
+<strong>value</strong> (bool): Pressed: true, Released: false</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_set_button(int id, int index, bool value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_set_led" id="_thymio2_set_led"></a>simAseba._thymio2_set_led</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the color of a LED</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_set_led(int id, int index, float r, float g, float b)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the LED</div>
+<div>
+<strong>r</strong> (float): Red component in [0, 1]</div>
+<div>
+<strong>g</strong> (float): Green component in [0, 1]</div>
+<div>
+<strong>b</strong> (float): Blue component in [0, 1]</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_set_led(int id, int index, float r, float g, float b)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_set_led_intensity" id="_thymio2_set_led_intensity"></a>simAseba._thymio2_set_led_intensity</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the color intentity of a LED</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_set_led_intensity(int id, int index, float a)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the LED</div>
+<div>
+<strong>a</strong> (float): The color intensity in [0, 1]</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_set_led_intensity(int id, int index, float a)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_set_prox_comm_tx" id="_thymio2_set_prox_comm_tx"></a>simAseba._thymio2_set_prox_comm_tx</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the integer value to be transmitted at each step if the communication is enabled. The real robot is limited to 11 bits. The simulated robot can send 32-bit integers.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_set_prox_comm_tx(int id, int tx)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>tx</strong> (int): The integer value to send.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_set_prox_comm_tx(int id, int tx)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="_thymio2_set_target_speed" id="_thymio2_set_target_speed"></a>simAseba._thymio2_set_target_speed</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the target angular speed of a motor</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba._thymio2_set_target_speed(int id, int index, float speed)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The ID of the Thymio2 controller</div>
+<div>
+<strong>index</strong> (int): The index of the motor (left: 0, right: 0)</div>
+<div>
+<strong>speed</strong> (float): The angular speed in rad/s</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba._thymio2_set_target_speed(int id, int index, float speed)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="add_event" id="add_event"></a>simAseba.add_event</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Add an Aseba event to a node. This is only possible after node creation, before the first simulation step.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.add_event(int id, string name, string description)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>name</strong> (string): The event name</div>
+<div>
+<strong>description</strong> (string): The event description that will be publicized on the network</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.add_event(int id, string name, string description)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="add_function" id="add_function"></a>simAseba.add_function</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Add an Aseba function to a node. This is only possible after node creation, before the first simulation step. When the Aseba function get called, it triggers a callback in this lua script with the same arguments.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.add_function(int id, string name, string description, argument_t[] arguments, string callback)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>name</strong> (string): The function name</div>
+<div>
+<strong>description</strong> (string): The function description that will be publicized on the network</div>
+<div>
+<strong>arguments</strong> (table of argument_t): The function arguments, which are also publicized on the network</div>
+<div>
+<strong>callback</strong> (string): The name of the lua function that implements the callback in the current script</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.add_function(int id, string name, string description, list arguments, string callback)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="add_variable" id="add_variable"></a>simAseba.add_variable</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Add an Aseba variable to a node. This is only possible after node creation, before the first simulation step. All Aseba variables are named array of a fixed number of 16-bit integers.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.add_variable(int id, string name, int size=1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>name</strong> (string): The variable name</div>
+<div>
+<strong>size</strong> (int, default: 1): The variable size (should be larger than 0)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.add_variable(int id, string name, int size=1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="create_node" id="create_node"></a>simAseba.create_node</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Create an Aseba node and connect it to an Aseba network. Until the first simulation step is completed, the node can be edited, adding variables, events and functions. After the first pass, its Aseba description will be freezed.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int id=simAseba.create_node(int handle, int port=33333, int id=-1, string name="node", string friendly_name="", int[] uuid={})<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>handle</strong> (int): Handle of the CoppeliaSim object</div>
+<div>
+<strong>port</strong> (int, default: 33333): The Aseba port number</div>
+<div>
+<strong>id</strong> (int, default: -1): The Aseba node ID. Two nodes in the same Aseba network cannot have the same id. Set to -1 to choose the lowest available id.</div>
+<div>
+<strong>name</strong> (string, default: "node"): The Aseba node name, which identifies the type of devices. Two nodes in the same Aseba network can have the same name.</div>
+<div>
+<strong>friendly_name</strong> (string, default: ""): A friendlier name used in Thymio Suite to label nodes. Must not be unique. If left empty, it is set to "{name}".</div>
+<div>
+<strong>uuid</strong> (table of int, default: {}): An 16-byte long uuid to uniquely identify nodes in Thymio Suite: each node should have a different uuid. If left empty, the uuid is set to "coppeliasim {id}".</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>id</strong> (int): The ID assigned to the Aseba node</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">int id=simAseba.create_node(int handle, int port=33333, int id=-1, string name="node", string friendly_name="", list uuid={})<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="destroy_network" id="destroy_network"></a>simAseba.destroy_network</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Destroy all nodes of an Aseba Network and disconnect it.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.destroy_network(int port=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>port</strong> (int, default: -1): The Aseba network port. Use -1 to destroy all networks.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.destroy_network(int port=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="destroy_node" id="destroy_node"></a>simAseba.destroy_node</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Remove an Aseba node from the Aseba network. All Aseba nodes will be eventually destroyed at the end of a simulation run, even if not explicitly requested using this callback.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.destroy_node(int id)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>id</strong> (int): The Aseba node ID.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.destroy_node(int id)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="emit_event" id="emit_event"></a>simAseba.emit_event</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Emit an Aseba event.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.emit_event(int id, string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>name</strong> (string): The event name</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.emit_event(int id, string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="get_variable" id="get_variable"></a>simAseba.get_variable</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get an Aseba variable</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int[] value=simAseba.get_variable(int id, string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>name</strong> (string): The varible name</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>value</strong> (table of int): The variable value</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">list value=simAseba.get_variable(int id, string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="list_nodes" id="list_nodes"></a>simAseba.list_nodes</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get a list of simulated Aseba nodes.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">node_t[] nodes=simAseba.list_nodes(int port=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>port</strong> (int, default: -1): If different from -1, limit to nodes attached to that port</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>nodes</strong> (table of node_t): The list of nodes</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">list nodes=simAseba.list_nodes(int port=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="load_script" id="load_script"></a>simAseba.load_script</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Load an Aseba script into a node from a file.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool result=simAseba.load_script(int id, string path)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>path</strong> (string): The path to the script file.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>result</strong> (bool): Whether script loading was successfull.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">bool result=simAseba.load_script(int id, string path)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="set_friendly_name" id="set_friendly_name"></a>simAseba.set_friendly_name</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the friendly name for an Aseba node in Thymio Suite from Mobsya. Has no effect when using older clients from the Aseba community.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.set_friendly_name(int id, string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>name</strong> (string): An string shorter than 56 characters.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.set_friendly_name(int id, string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="set_script" id="set_script"></a>simAseba.set_script</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Load an Aseba script into a node from text code. The code cannot define or use user events or constants. If you need them, please use `load_script` instead.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool result=simAseba.set_script(int id, string code)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>code</strong> (string): The text code with the Aseba script.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>result</strong> (bool): Whether script loading was successfull.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">bool result=simAseba.set_script(int id, string code)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="set_uuid" id="set_uuid"></a>simAseba.set_uuid</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the indentifier of an Aseba node in Thymio Suite from Mobsya. Has no effect when using older clients from the Aseba community.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.set_uuid(int id, int[] uuid)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>uuid</strong> (table of int): An array of 16 bytes</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.set_uuid(int id, list uuid)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="set_variable" id="set_variable"></a>simAseba.set_variable</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set an Aseba variable. The value array should have same size of the variable and be limited to the 16-bit integers range, i.e., [-32768, 32767]. Higher bits are ignored.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simAseba.set_variable(int id, string name, int[] value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>id</strong> (int): The Aseba node ID</div>
+<div>
+<strong>name</strong> (string): The variable name</div>
+<div>
+<strong>value</strong> (table of int): The variable value</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftPSyn">Python synopsis</td>
+<td class="apiTableRightPSyn">simAseba.set_variable(int id, string name, list value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+</td></tr>
+<tr><td id="enums" class="section"></td></tr>
+<tr><td id="structs" class="section">
+<br><br><h1>Data structures</h1>
+<p>Data structures are used to pass complex data around. Create data structures in Lua in the form of a map, e.g.: <code>{line_size=3, add_to_legend=false, selectable=true}</code></p>
+<h3 class="subsectionBar">
+<a name="struct:argument_t" id="struct:argument_t"></a>argument_t</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                Description
+                                            </td>
+<td class="apiTableRightDescr">Description of an argument of an Aseba function used in <a href="#add_function">simAseba.add_function</a>.<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Fields</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>size</strong> (int, default: 1): The argument size</div>
+<div>
+<strong>name</strong> (string, default: ): The argument name</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="struct:node_t" id="struct:node_t"></a>node_t</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                Description
+                                            </td>
+<td class="apiTableRightDescr">Aseba node<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Fields</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>port</strong> (int): The port of the Aseba network the node belongs to.</div>
+<div>
+<strong>name</strong> (string): The node name</div>
+<div>
+<strong>id</strong> (int): The node id</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="struct:prox_comm_message_t" id="struct:prox_comm_message_t"></a>prox_comm_message_t</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                Description
+                                            </td>
+<td class="apiTableRightDescr">A proximity communication<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Fields</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>rx</strong> (int): The value, which is equal to the non-zero payloads</div>
+<div>
+<strong>payloads</strong> (table of int): The payload received by each sensor; set to 0 if the message was not recevied.</div>
+<div>
+<strong>intensities</strong> (table of float): The light intensity read by each sensor; set to 0 if the message was not recevied. </div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                See also
+                                            </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+</td></tr>
+<tr><td id="scriptFunctions" class="section"></td></tr>
+</table></div>
+<script type="text/javascript">
+//
+view = getParameterByName('view')
+document.getElementById('alphabetical').style.display = view == 'alphabetical' ? 'table-cell' : 'none'
+document.getElementById('commands').style.display = view == null ? 'table-cell' : 'none'
+document.getElementById('enums').style.display = view == null ? 'table-cell' : 'none'
+document.getElementById('structs').style.display = view == null ? 'table-cell' : 'none'
+document.getElementById('scriptFunctions').style.display = view == null ? 'table-cell' : 'none'
+//
+                </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script><script type="text/javascript">
+//
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('code.hljs').forEach((block) => {
+        hljs.highlightBlock(block);
+    });
+});
+//
+                </script>
+</body>
+</html>
